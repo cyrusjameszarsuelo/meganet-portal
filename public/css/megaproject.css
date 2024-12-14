@@ -1,0 +1,14 @@
+.megaprojectCarousel {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.megaProjectsImages {
+    width: 100%;
+    height: 225px;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+}
