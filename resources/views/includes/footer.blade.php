@@ -8,7 +8,7 @@
 
             <div class="row mt-4  d-flex logoFooter">
                 {{-- <div class="col justify-content-center align-self-center">
-                    <a target="_blank" href="https://hr-portal.atwebpages.com/"><img
+                    <a target="_blank" href="https://human-resource.portalwebsite.net/"><img
                             src="{{ asset('quicklinks/hrportal.png') }}" alt="" style="width: 80%"></a>
                 </div> --}}
                 <div class="col justify-content-center align-self-center">

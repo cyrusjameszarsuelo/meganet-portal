@@ -26,7 +26,7 @@
                             <img src="{{ asset($meganews->meganews_images->first()->image) }}"
                             alt="" class="imgMegaprojectsLarge">
                         @else
-                            <img src="https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/{{ $meganews->meganews_images->first()->image }}"
+                            <img src="https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/{{ $meganews->meganews_images->first()->image }}"
                             alt="" class="imgMegaprojectsLarge">
                         @endif
 
@@ -45,12 +45,12 @@
                                                 <img src="{{ $meganewsImage->image }}" alt="image"
                                                 class="w-100 {{ $key == 3 ? 'imgMeganewsDetailsSmallBlur' : 'imgMeganewsDetailsSmall' }}">
                                             @else
-                                                <img src="https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/{{ $meganewsImage->image }}" alt="image"
+                                                <img src="https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/{{ $meganewsImage->image }}" alt="image"
                                                 class="w-100 {{ $key == 3 ? 'imgMeganewsDetailsSmallBlur' : 'imgMeganewsDetailsSmall' }}">
                                             @endif
                                         
                                         <div class="img-filter-overlay fables-main-color-transparent row m-0">
-                                            <a data-fancybox="gallery" href="{{ $meganewsImage->image[0] == 'h' ? $meganewsImage->image : 'https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/'. $meganewsImage->image }}">
+                                            <a data-fancybox="gallery" href="{{ $meganewsImage->image[0] == 'h' ? $meganewsImage->image : 'https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/'. $meganewsImage->image }}">
                                                 @if ($key == 3)
                                                     <div class="h-100 d-flex justify-content-center align-items-center ">
                                                         <h5 class="text-white">{{ $meganews->meganews_images->count() }}
@@ -70,11 +70,11 @@
                                         <img src="{{ $meganewsImage->image }}" alt="image"
                                         class="w-100 imgMeganewsDetailsSmall" hidden>
                                     @else
-                                        <img src="https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/{{ $meganewsImage->image }}" alt="image"
+                                        <img src="https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/{{ $meganewsImage->image }}" alt="image"
                                         class="w-100 imgMeganewsDetailsSmall" hidden>
                                     @endif
                                     <div class="img-filter-overlay fables-main-color-transparent row m-0">
-                                        <a data-fancybox="gallery" href="{{ $meganewsImage->image[0] == 'h' ? $meganewsImage->image : 'https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/'. $meganewsImage->image }}"></a>
+                                        <a data-fancybox="gallery" href="{{ $meganewsImage->image[0] == 'h' ? $meganewsImage->image : 'https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/'. $meganewsImage->image }}"></a>
                                     </div>
                                 </div>
                             @endif

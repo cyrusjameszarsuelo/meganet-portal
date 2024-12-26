@@ -84,13 +84,13 @@
     }
 
     .card:nth-child(1):before {
-        background-image: url({{ $meganews->meganews_images->first()->image[0] == 'h' ? $meganews->meganews_images->first()->image : 'https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/' . $meganews->meganews_images->first()->image }});
+        background-image: url({{ $meganews->meganews_images->first()->image[0] == 'h' ? $meganews->meganews_images->first()->image : 'https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/' . $meganews->meganews_images->first()->image }});
         filter: blur(3px);
         background-position: center;
     }
 
     .card:nth-child(2):before {
-        background-image: url({{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-portal-admin.atwebpages.com/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }});
+        background-image: url({{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }});
         filter: blur(3px);
         background-position: center;
     }

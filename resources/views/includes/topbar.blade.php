@@ -54,7 +54,7 @@
                                 @endforeach
                             </div>
                         </li>
-                        <li class="nav-item"><a href="https://hr-portal.atwebpages.com/"
+                        <li class="nav-item"><a href="https://human-resource.portalwebsite.net/"
                                 class="nav-link hover-underline-animation">Corporate HR Portal</a></li>
                         {{-- <li class="nav-item"><a href="/our-business-and-subsidiaries"
                                 class="nav-link hover-underline-animation">Our Businesses &
@@ -77,7 +77,7 @@
                             @if ($user['mail'] == 'cjzarsuelo@megawide.com.ph' || $user['mail'] ==
                             'jjpascua@megawide.com.ph' || $user['mail'] == 'jnmaramba@megawide.com.ph')
                             <li class="nav-item" >
-                                <a href="https://meganet-portal-admin.atwebpages.com/public/login" target="_blank" class="nav-link hover-underline-animation" style="padding-left: 0px; padding-right: 0px;">
+                                <a href="https://meganet-admin.portalwebsite.net/login" target="_blank" class="nav-link hover-underline-animation" style="padding-left: 0px; padding-right: 0px;">
                                     <i class="fa-solid fa-user mr-2 pt-1" style="font-size: 18px; color: black;"></i>
                                 </a>
                             </li>

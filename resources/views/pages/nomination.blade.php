@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-12 col-lg-6 sigla-form" style="background-color: #0d0d0d; color: #ee2f21;">
                     <div class="text-center">
-                        <img src="https://meganetportal.atwebpages.com/images/sigla-white.png" alt=""
+                        <img src="https://meganet-admin.portalwebsite.net/images/sigla-white.png" alt=""
                             style="width: 13vw;">
                     </div>
                     <form id="nominationForm">

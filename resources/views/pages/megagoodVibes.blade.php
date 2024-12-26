@@ -27,9 +27,9 @@
         <div class="content">
             <div class="row">
                 <div class="col-md-8 col-12">
-                    <video poster="{{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-portal-admin.atwebpages.com/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }}" controls
+                    <video poster="{{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }}" controls
                         style="width: 100%; height: 500px; background-color: rgb(0, 0, 0) !important;">
-                        <source src="{{ $megagoodVibes->file[0] == 'h' ? $megagoodVibes->file : 'https://meganet-portal-admin.atwebpages.com/uploads/MegaGoodVibes-Videos/' . $megagoodVibes->file }}" type="video/mp4">
+                        <source src="{{ $megagoodVibes->file[0] == 'h' ? $megagoodVibes->file : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Videos/' . $megagoodVibes->file }}" type="video/mp4">
                     </video>
 
                     <div class="row">
@@ -126,7 +126,7 @@
                         @if ($item->id != $megagoodVibes->id)
                             <div class="row mt-3">
                                 <div class="col-md-4">
-                                    <img class="megagoodVibesImages" src="{{ $item->thumbnail[0] == 'h' ? $item->thumbnail : 'https://meganet-portal-admin.atwebpages.com/uploads/MegaGoodVibes-Thumbnail/' . $item->thumbnail }}" alt="">
+                                    <img class="megagoodVibesImages" src="{{ $item->thumbnail[0] == 'h' ? $item->thumbnail : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Thumbnail/' . $item->thumbnail }}" alt="">
                                 </div>
                                 <div class="col-md-8">
                                     <span>

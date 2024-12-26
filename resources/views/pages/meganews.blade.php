@@ -49,7 +49,7 @@
                                                         alt="First slide">
                                                 @else
                                                     <img class="meganewsCarousel"
-                                                        src="https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/{{ $meganewsData->meganews_images->first()->image }}"
+                                                        src="https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/{{ $meganewsData->meganews_images->first()->image }}"
                                                         alt="First slide">
                                                 @endif
                                             @else
@@ -137,7 +137,7 @@
                                                                 src="{{ $meganewsGroup->meganews_images->first()->image }}">
                                                         @else
                                                             <img
-                                                                src="https://meganet-portal-admin.atwebpages.com/uploads/Meganews-Images/{{ $meganewsGroup->meganews_images->first()->image }}">
+                                                                src="https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/{{ $meganewsGroup->meganews_images->first()->image }}">
                                                         @endif
                                                     @else
                                                     @endif

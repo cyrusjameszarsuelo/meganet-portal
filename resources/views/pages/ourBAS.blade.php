@@ -30,7 +30,7 @@
                     <div class="owl-carousel">
                         @foreach ($ourBas as $ourBasData)
                             <div class="item">
-                                <img src="{{ 'https://meganet-portal-admin.atwebpages.com/uploads/Our-Businesses-and-Subsidiaries/' . $ourBasData->image }}">
+                                <img src="{{ 'https://meganet-admin.portalwebsite.net/uploads/Our-Businesses-and-Subsidiaries/' . $ourBasData->image }}">
                             </div>
                         @endforeach
                     </div>
