@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Megaproject;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 
 class MegaprojectController extends Controller
 {
@@ -17,7 +17,7 @@ class MegaprojectController extends Controller
      */
     public function index($id = null)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $megaprojectsAll = Megaproject::all();        
         $runningCredit = $this->getRunningCredit();
@@ -33,7 +33,7 @@ class MegaprojectController extends Controller
 
     public function megaprojectDetail($id)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
         $corporateOffice = $this->getCorporateOffice();
         $megaproject = Megaproject::find($id);

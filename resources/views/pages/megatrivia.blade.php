@@ -33,7 +33,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="text"
-                                                class="form-control {{ $megatrivia->megatriviaAnswers->where('user', $user['contacts']['displayName'])->count() == 1 ? 'disableField' : '' }}"
+                                                class="form-control {{ $megatrivia->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ? 'disableField' : '' }}"
                                                 name="answer" id="answer" autocomplete="off"
                                                 placeholder="Type your answer"
                                                 style="border: 1px black solid;
@@ -46,7 +46,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <button type="submit" id="submitButton" class="btn btn-danger btn-block"
-                                            {{ $megatrivia->megatriviaAnswers->where('user', $user['contacts']['displayName'])->count() == 1 ? 'disabled' : '' }}
+                                            {{ $megatrivia->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ? 'disabled' : '' }}
                                             style="background-color: #ee2f21">Submit</button>
                                     </div>
                                 </div>

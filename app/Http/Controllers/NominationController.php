@@ -11,7 +11,7 @@ use App\Models\OurValue;
 use App\Models\SiglaDepartment;
 use App\Models\SiglaNominee;
 use Illuminate\Http\Request;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use Response;
 
 class NominationController extends Controller
@@ -24,12 +24,12 @@ class NominationController extends Controller
      */
     public function index()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $listOfUser = self::getValidEmployees();
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
         $values = OurValue::all();
-        $siglaNominees = SiglaNominee::where('email', '!=', $user['contacts']['mail'])
+        $siglaNominees = SiglaNominee::where('email', '!=', $user['mail'])
             ->orderBy('name')
             ->get();
         $siglaDepartments = SiglaDepartment::all();
@@ -47,7 +47,7 @@ class NominationController extends Controller
     public function mechanics()
     {
         $runningCredit = $this->getRunningCredit();
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
 
         return view('pages.nominationMechanics')
@@ -59,11 +59,11 @@ class NominationController extends Controller
 
     public function group()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
         $values = OurValue::all();
-        $siglaNominees = SiglaNominee::where('email', '!=', $user['contacts']['mail'])
+        $siglaNominees = SiglaNominee::where('email', '!=', $user['mail'])
             ->orderBy('name')
             ->get();
         $siglaDepartments = SiglaDepartment::all();

@@ -74,8 +74,8 @@
 
                     <div class="collapse navbar-collapse" id="ftco-nav">
                         <ul class="navbar-nav m-auto">
-                            @if ($user['contacts']['mail'] == 'cjzarsuelo@megawide.com.ph' || $user['contacts']['mail'] ==
-                            'jjpascua@megawide.com.ph' || $user['contacts']['mail'] == 'jnmaramba@megawide.com.ph')
+                            @if ($user['mail'] == 'cjzarsuelo@megawide.com.ph' || $user['mail'] ==
+                            'jjpascua@megawide.com.ph' || $user['mail'] == 'jnmaramba@megawide.com.ph')
                             <li class="nav-item" >
                                 <a href="https://meganet-portal-admin.atwebpages.com/public/login" target="_blank" class="nav-link hover-underline-animation" style="padding-left: 0px; padding-right: 0px;">
                                     <i class="fa-solid fa-user mr-2 pt-1" style="font-size: 18px; color: black;"></i>
@@ -101,9 +101,9 @@
                 </div>
 
                 <div class="userInfo">
-                    <span style="color: #ee2f21"><b>{{ $user['contacts']['displayName'] }}</b></span>
+                    <span style="color: #ee2f21"><b>{{ $user['displayName'] }}</b></span>
                     <span class="ml-2 "><i class="fa fa-user userIcon"></i></span>
-                    <h6 class="position"><i>{{ $user['contacts']['jobTitle'] }}</i></h6>
+                    <h6 class="position"><i>{{ $user['jobTitle'] }}</i></h6>
                 </div>
         </div>
     </nav>

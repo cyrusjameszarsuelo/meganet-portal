@@ -94,8 +94,8 @@
                     <div class="row mt-3">
                         <div class="col-md-2">
                             <span class="heartReactSpan"><i
-                                    class=" {{ $meganews->meganewsLikes->where('user', $user['contacts']['displayName'])->count() == 1 ? 'fa-solid' : 'fa-regular' }} fa-heart heartReact"
-                                    style=" {{ $meganews->meganewsLikes->where('user', $user['contacts']['displayName'])->count() == 1 ? 'color: #ee2f21' : '' }} "></i>
+                                    class=" {{ $meganews->meganewsLikes->where('user', $user['displayName'])->count() == 1 ? 'fa-solid' : 'fa-regular' }} fa-heart heartReact"
+                                    style=" {{ $meganews->meganewsLikes->where('user', $user['displayName'])->count() == 1 ? 'color: #ee2f21' : '' }} "></i>
                                 &nbsp; Like</span>
                         </div>
                         <div class="col-md-2">
@@ -105,7 +105,7 @@
                     <hr>
                     <div class="row mt-3">
                         <div class="col-md-1">
-                            <span class="initialCommentator"> {{ $user['contacts']['displayName'][0] }}
+                            <span class="initialCommentator"> {{ $user['displayName'][0] }}
                             </span>
                         </div>
                         <div class="col-md-11">
@@ -142,7 +142,7 @@
                                                         <span class="commentBanner"
                                                             style="font-size: 15px; line-height: 26px; font-family: Helvetica">{{ $comment->comment }}</span>
                                                     </div>
-                                                    @if ($comment->user == $user['contacts']['displayName'])
+                                                    @if ($comment->user == $user['displayName'])
                                                         <div class="btn-group float-right mt-2">
                                                             <button class="btn btn-info btn-sm updateMeganewsCommentButton"
                                                                 data-toggle="modal" data-target="#updateMeganewsComment"

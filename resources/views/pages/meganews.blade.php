@@ -156,7 +156,7 @@
                     </section>
                 </div>
                 <div class="tab-pane fade" id="pdfs" role="tabpanel" aria-labelledby="pdfs-tab">
-                    @if ($user['contacts']['mail'] == 'cjzarsuelo@megawide.com.ph' || $user['contacts']['mail'] == 'jjpascua@megawide.com.ph')
+                    @if ($user['mail'] == 'cjzarsuelo@megawide.com.ph' || $user['mail'] == 'jjpascua@megawide.com.ph')
                         <object data="{{ asset('MegaNews Q22024 Issue 1.pdf') }}" type="application/pdf"
                             style="width: 100%; height: 100vh">
                             <p>Alternative text - include a link <a href="{{ asset('MegaNews Q22024 Issue 1.pdf') }}">to

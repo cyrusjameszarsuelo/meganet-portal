@@ -36,7 +36,7 @@
                                         {!! $megatriviaData->content !!}
                                     </p>
                                     <span>Answer:
-                                        {{ $megatriviaData->megatriviaAnswers->where('user', $user['contacts']['displayName'])->count() == 1 ? $megatriviaData->answer : '' }}
+                                        {{ $megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ? $megatriviaData->answer : '' }}
                                     </span>
                                     <br>
                                     <span>By:
@@ -50,10 +50,10 @@
                                     </span>
                                     <br>
                                     @if (
-                                        $megatriviaData->megatriviaAnswers->where('user', $user['contacts']['displayName'])->count() == 1 ||
-                                            $user['contacts']['mail'] == 'cjzarsuelo@megawide.com.ph' ||
-                                            $user['contacts']['mail'] == 'jjpascua@megawide.com.ph' ||
-                                            $user['contacts']['mail'] == 'jnmaramba@megawide.com.ph')
+                                        $megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ||
+                                            $user['mail'] == 'cjzarsuelo@megawide.com.ph' ||
+                                            $user['mail'] == 'jjpascua@megawide.com.ph' ||
+                                            $user['mail'] == 'jnmaramba@megawide.com.ph')
                                         <div class="row">
                                             <div class="col-6 text-center">
                                                 <a type="button" data-toggle="modal"

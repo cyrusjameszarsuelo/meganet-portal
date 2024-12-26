@@ -34,14 +34,12 @@ use Dcblogdev\MsGraph\Models\MsGraphToken;
 Route::redirect('/', 'login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers'], function(){
+Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::get('connect', [AuthController::class, 'connect'])->name('connect');
 });
 
-Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function(){
-
-
+Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function () {
     // Main Controller
 
     Route::get('/home', [MainController::class, 'index']);
@@ -121,7 +119,6 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function(){
     Route::post('/nominate', [NominationController::class, 'store']);
 
     Route::get('/getValidEmployees', [NominationController::class, 'getValidEmployees']);
-    Route::get('/getUsersTest', [NominationController::class, 'getUsersTest']);
 
-    
+
 });

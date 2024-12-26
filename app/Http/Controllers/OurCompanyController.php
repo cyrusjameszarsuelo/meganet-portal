@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\OurCompany;
 use Illuminate\Http\Request;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 
 class OurCompanyController extends Controller
 {
@@ -16,7 +16,7 @@ class OurCompanyController extends Controller
      */
     public function index()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
         $ourCompany = OurCompany::orderBy('created_at', 'DESC')

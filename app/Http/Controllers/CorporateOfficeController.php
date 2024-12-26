@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CorporateOffice;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use File;
 
 class CorporateOfficeController extends Controller
@@ -17,7 +17,7 @@ class CorporateOfficeController extends Controller
      */
     public function index($id)
     {
-        $user = MsGraph::contacts()->get();
+       $user = MsGraph::get('me');
                 $runningCredit = $this->getRunningCredit();
 
         $corporateOffice = $this->getCorporateOffice();
@@ -37,7 +37,7 @@ class CorporateOfficeController extends Controller
      */
     public function create($file, $id)
     {
-        $user = MsGraph::contacts()->get();
+       $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
 

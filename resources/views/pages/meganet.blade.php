@@ -207,7 +207,7 @@
                                             <div class="row no-gutters">
                                                 <div class="col-2 text-center">
                                                     <span class="initialCommentator">
-                                                        {{ $user['contacts']['displayName'][0] }}
+                                                        {{ $user['displayName'][0] }}
                                                     </span>
                                                 </div>
 
@@ -397,7 +397,7 @@
                             <span aria-hidden="true">&times;</span>
                         </a>
                         <a href="{{ url('/nomination-mechanics') }}">
-                            <img src="{{ asset('https://meganet-portal-admin.atwebpages.com/uploads/sigla-awards-image/' . $award->image) }}" alt="{{$award->title}}"
+                            <img src="{{ asset('https://meganet-admin.portalwebsite.net/uploads/sigla-awards-image/' . $award->image) }}" alt="{{$award->title}}"
                                 width="100%" height="100%">
                         </a>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use Illuminate\Http\Request;
 use App\Models\Meganews;
 use App\Models\Megatrivia;
@@ -14,7 +15,6 @@ use App\Models\BannerQuestionImage;
 use App\Models\User;
 use App\Models\Award;
 use App\Events\MentionEvent;
-use MsGraph;
 use Response;
 use File;
 
@@ -29,7 +29,7 @@ class MainController extends Controller
     public function index()
     {
 
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $meganews = Meganews::orderBy('created_at', 'DESC')
             ->first();
         $megagoodVibes = MegagoodVibe::orderBy('created_at', 'DESC')
@@ -47,8 +47,8 @@ class MainController extends Controller
         $award = Award::orderBy('created_at', 'DESC')
             ->first();
 
-            // print_r($userList);
-            // die();
+        // print_r($userList);
+        // die();
 
         return view('pages.meganet')
             ->withUser($user)
@@ -65,7 +65,7 @@ class MainController extends Controller
 
     public function ourCompany()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
 
@@ -79,7 +79,7 @@ class MainController extends Controller
 
     public function ourCompanyDetails()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
 
         $corporateOffice = $this->getCorporateOffice();
@@ -92,7 +92,7 @@ class MainController extends Controller
 
     public function ourBas()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
 
         $corporateOffice = $this->getCorporateOffice();
@@ -105,7 +105,7 @@ class MainController extends Controller
 
     public function megawideConstruction()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
 
         $corporateOffice = $this->getCorporateOffice();
@@ -118,7 +118,7 @@ class MainController extends Controller
 
     public function storeMegawideConstructionFiles($file)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
 
@@ -138,7 +138,7 @@ class MainController extends Controller
 
     public function pcs()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
 
         $corporateOffice = $this->getCorporateOffice();
@@ -152,7 +152,7 @@ class MainController extends Controller
     public function storePcsFiles($file)
     {
 
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
 
@@ -205,13 +205,13 @@ class MainController extends Controller
 
         broadcast(new MentionEvent($request->comment))->toOthers();
 
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $bannerQuestionComment = new BannerQuestionComment;
 
         $bannerQuestionComment->banner_question_id = $request->banner_question_id;
         $bannerQuestionComment->comment = $request->comment;
-        $bannerQuestionComment->user = $user['contacts']['displayName'];
+        $bannerQuestionComment->user = $user['displayName'];
 
         $bannerQuestionComment->save();
 
@@ -221,7 +221,7 @@ class MainController extends Controller
             $bannerQuestionImage = new BannerQuestionImage;
 
             $bannerQuestionImage->banner_question_comment_id = $bannerQuestionComment->id;
-            $bannerQuestionImage->user = $user['contacts']['displayName'];
+            $bannerQuestionImage->user = $user['displayName'];
             $bannerQuestionImage->image = $filename;
 
             $bannerQuestionImage->save();
@@ -241,11 +241,11 @@ class MainController extends Controller
 
     public function likeBannerComment(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $getBannerQuestionLike = BannerQuestionLike::where('banner_question_id', $request->banner_question_id)
             ->where('banner_question_comment_id', $request->banner_question_comment_id)
-            ->where('user', $user['contacts']['displayName'])
+            ->where('user', $user['displayName'])
             ->get();
 
         if ($getBannerQuestionLike->isEmpty()) {
@@ -253,13 +253,13 @@ class MainController extends Controller
 
             $bannerQuestionLike->banner_question_id = $request->banner_question_id;
             $bannerQuestionLike->banner_question_comment_id = $request->banner_question_comment_id;
-            $bannerQuestionLike->user = $user['contacts']['displayName'];
+            $bannerQuestionLike->user = $user['displayName'];
 
             $bannerQuestionLike->save();
         } else {
             $bannerQuestionLike = BannerQuestionLike::where('banner_question_id', $request->banner_question_id)
                 ->where('banner_question_comment_id', $request->banner_question_comment_id)
-                ->where('user', $user['contacts']['displayName'])->delete();
+                ->where('user', $user['displayName'])->delete();
         }
 
         return Response::json($bannerQuestionLike);
@@ -267,11 +267,11 @@ class MainController extends Controller
 
     public function removeLikeBannerComment(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $bannerQuestionLike = BannerQuestionLike::where('banner_question_id', $request->banner_question_id)
             ->where('banner_question_comment_id', $request->banner_question_comment_id)
-            ->where('user', $user['contacts']['displayName'])
+            ->where('user', $user['displayName'])
             ->delete();
 
         return Response::json($bannerQuestionLike);
@@ -292,10 +292,10 @@ class MainController extends Controller
 
     // public function getLikesOnComment(Request $request)
     // {
-    //     $user = MsGraph::contacts()->get();
+    //     $user = MsGraph::get('me');
 
     //     $bannerQuestionLike = BannerQuestionLike::where('banner_question_comment_id', $request->banner_question_comment_id)
-    //         ->where('user', $user['contacts']['displayName'])
+    //         ->where('user', $user['displayName'])
     //         ->first();
 
     //     return Response::json($bannerQuestionLike);

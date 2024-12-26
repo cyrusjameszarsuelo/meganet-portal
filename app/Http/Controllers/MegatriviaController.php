@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Megatrivia;
 use App\Models\MegatriviaAnswer;
 
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use DB;
 use Response;
 
@@ -20,7 +20,7 @@ class MegatriviaController extends Controller
      */
     public function index()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
         $corporateOffice = $this->getCorporateOffice();
         $megatrivia = Megatrivia::orderBy('created_at', 'DESC')
@@ -35,7 +35,7 @@ class MegatriviaController extends Controller
 
     public function allMegatrivia()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
         $megatrivia = Megatrivia::orderBy('created_at', 'DESC')
@@ -66,13 +66,13 @@ class MegatriviaController extends Controller
      */
     public function store(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $megatriviaAnswer = new MegatriviaAnswer;
 
         $megatriviaAnswer->answer = $request->answer;
         $megatriviaAnswer->megatrivia_id = $request->megatrivia_id;
-        $megatriviaAnswer->user = $user['contacts']['displayName'];
+        $megatriviaAnswer->user = $user['displayName'];
 
         $megatriviaAnswer->save();
 

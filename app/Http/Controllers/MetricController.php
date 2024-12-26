@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Response;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 
 class MetricController extends Controller
 {
@@ -39,14 +39,14 @@ class MetricController extends Controller
      */
     public function store(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $metrics = new Metric;
 
         $metrics->action = $request->action;
         $metrics->url_name = $request->url_name;
         $metrics->action_val = $request->action_val;
-        $metrics->user = $user['contacts']['displayName'];
+        $metrics->user = $user['displayName'];
 
         $metrics->save();
 

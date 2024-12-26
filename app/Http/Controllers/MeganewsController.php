@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Meganews;
 use App\Models\MeganewsComment;
 use App\Models\MeganewsLike;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use Response;
 use Str;
 use DB;
@@ -16,7 +16,7 @@ use DB;
 class MeganewsController extends Controller
 {
     public function index ($date = '') {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $corporateOffice = $this->getCorporateOffice();
         $runningCredit = $this->getRunningCredit();
 
@@ -54,7 +54,7 @@ class MeganewsController extends Controller
     }
 
     public function view($id) {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $meganews = Meganews::select('*', DB::raw('count(id) as `data`'), DB::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),  DB::raw('YEAR(created_at) year, MONTH(created_at) month'))
             ->find($id);
         $corporateOffice = $this->getCorporateOffice();
@@ -69,13 +69,13 @@ class MeganewsController extends Controller
 
     public function store(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $meganewsComments = new MeganewsComment;
 
         $meganewsComments->meganews_id = $request->meganews_id; 
         $meganewsComments->comment = $request->comment; 
-        $meganewsComments->user = $user['contacts']['displayName']; 
+        $meganewsComments->user = $user['displayName']; 
 
         $meganewsComments->save();
         
@@ -85,22 +85,22 @@ class MeganewsController extends Controller
 
     public function likeMeganewsContent(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $getMeganewsLike = MeganewsLike::where('meganews_id', $request->meganews_id)
-            ->where('user', $user['contacts']['displayName'])
+            ->where('user', $user['displayName'])
             ->get();
 
         if($getMeganewsLike->isEmpty()){
             $meganewsLikes = new MeganewsLike;
 
             $meganewsLikes->meganews_id = $request->meganews_id;
-            $meganewsLikes->user = $user['contacts']['displayName']; 
+            $meganewsLikes->user = $user['displayName']; 
     
             $meganewsLikes->save();
         } else {
             $meganewsLikes = MeganewsLike::where('meganews_id', $request->meganews_id)
-                ->where('user', $user['contacts']['displayName'])
+                ->where('user', $user['displayName'])
                 ->delete();
         }
 

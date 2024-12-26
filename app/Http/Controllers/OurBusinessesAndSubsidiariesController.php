@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OurBusinessesAndSubsidiary;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 
 class OurBusinessesAndSubsidiariesController extends Controller
 {
@@ -16,7 +16,7 @@ class OurBusinessesAndSubsidiariesController extends Controller
      */
     public function index()
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
         $runningCredit = $this->getRunningCredit();
         $ourBas = OurBusinessesAndSubsidiary::all();
 

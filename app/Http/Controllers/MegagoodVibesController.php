@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MegagoodVibe;
 use App\Models\MegagoodVibesComment;
 use App\Models\MegagoodVibesLike;
-use MsGraph;
+use Dcblogdev\MsGraph\Facades\MsGraph;
 use Response;
 
 class MegagoodVibesController extends Controller
@@ -19,7 +19,7 @@ class MegagoodVibesController extends Controller
      */
     public function index($id)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $megagoodVibes = MegagoodVibe::find($id);
 
@@ -54,11 +54,11 @@ class MegagoodVibesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $megagoodVibeComments = new MegagoodVibesComment;
 
-        $megagoodVibeComments->user = $user['contacts']['displayName'];
+        $megagoodVibeComments->user = $user['displayName'];
         $megagoodVibeComments->comment = $request->comment;
         $megagoodVibeComments->megagood_vibe_id = $request->megagood_vibe_id;
 
@@ -70,22 +70,22 @@ class MegagoodVibesController extends Controller
 
     public function likeMegagoodVibesContent(Request $request) 
     {
-        $user = MsGraph::contacts()->get();
+        $user = MsGraph::get('me');
 
         $getMegagoodVibesLike = MegagoodVibesLike::where('megagood_vibe_id', $request->megagood_vibe_id)
-            ->where('user', $user['contacts']['displayName'])
+            ->where('user', $user['displayName'])
             ->get();
 
         if($getMegagoodVibesLike->isEmpty()){
             $megagoodVibesLikes = new MegagoodVibesLike;
 
             $megagoodVibesLikes->megagood_vibe_id = $request->megagood_vibe_id;
-            $megagoodVibesLikes->user = $user['contacts']['displayName']; 
+            $megagoodVibesLikes->user = $user['displayName']; 
     
             $megagoodVibesLikes->save();
         } else {
             $megagoodVibesLikes = MegagoodVibesLike::where('megagood_vibe_id', $request->megagood_vibe_id)
-                ->where('user', $user['contacts']['displayName'])
+                ->where('user', $user['displayName'])
                 ->delete();
         }
 

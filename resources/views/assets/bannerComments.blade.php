@@ -17,7 +17,7 @@
                 @endif
                 {!! $comment->comment !!}
                 <div
-                    class="row {{ $comment->user == $user['contacts']['displayName'] ? 'actionButtonHidden' : 'actionButtonHiddenPermanent' }}">
+                    class="row {{ $comment->user == $user['displayName'] ? 'actionButtonHidden' : 'actionButtonHiddenPermanent' }}">
                     <div class="col-6 text-center">
                         <span class="text-center ">
                             <a type="button" data-id="{{ $comment->id }}" data-comment="{{ trim($comment->comment) }}"
@@ -35,9 +35,9 @@
         <div class="row mt-1">
             <div class="col-12">
                 <i class=" heartReact{{ $comment->id }}
-                    {{ $comment->bannerQuestionLikes->where('user', $user['contacts']['displayName'])->count() >= 1 ? 'fa-solid' : 'fa-regular' }}
+                    {{ $comment->bannerQuestionLikes->where('user', $user['displayName'])->count() >= 1 ? 'fa-solid' : 'fa-regular' }}
                      fa-heart heartReact"
-                    style="{{ $comment->bannerQuestionLikes->where('user', $user['contacts']['displayName'])->count() >= 1 ? 'color: #ee2f21' : '' }}"
+                    style="{{ $comment->bannerQuestionLikes->where('user', $user['displayName'])->count() >= 1 ? 'color: #ee2f21' : '' }}"
                     data-id="{{ $comment->id }}"></i>
                 <a type="button" class="likeList" data-record="{{ json_encode($comment->bannerQuestionLikes) }}">
                     <i style="font-size: 12px"
