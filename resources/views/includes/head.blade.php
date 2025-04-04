@@ -8,7 +8,7 @@
 <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/meganet.css') }}">
 <link rel="stylesheet" href="{{ asset('css/article.css') }}">
-<title>Meganets</title>
+<title>Meganet</title>
 <link rel="icon" type="image/x-icon" href="{{ asset('images/megawide-icon.png') }}">
 <!-- Hotjar Tracking Code for https://meganetportal.atwebpages.com/ -->
 <script>
