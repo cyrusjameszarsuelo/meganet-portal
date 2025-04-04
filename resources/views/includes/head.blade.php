@@ -8,5 +8,22 @@
 <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/meganet.css') }}">
 <link rel="stylesheet" href="{{ asset('css/article.css') }}">
-<title>Meganet</title>
-<link rel="icon" type="image/x-icon" href="{{asset('images/megawide-icon.png')}}">
+<title>Meganets</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('images/megawide-icon.png') }}">
+<!-- Hotjar Tracking Code for https://meganetportal.atwebpages.com/ -->
+<script>
+    (function(h, o, t, j, a, r) {
+        h.hj = h.hj || function() {
+            (h.hj.q = h.hj.q || []).push(arguments)
+        };
+        h._hjSettings = {
+            hjid: 3602179,
+            hjsv: 6
+        };
+        a = o.getElementsByTagName('head')[0];
+        r = o.createElement('script');
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+</script>
