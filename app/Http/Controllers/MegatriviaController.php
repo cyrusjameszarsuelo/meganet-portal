@@ -25,7 +25,7 @@ class MegatriviaController extends Controller
         $corporateOffice = $this->getCorporateOffice();
         $megatrivia = Megatrivia::orderBy('created_at', 'DESC')
             ->first();
-        
+
         return view('pages.megatrivia')
             ->withMegatrivia($megatrivia)
             ->withRunningCredit($runningCredit)
@@ -67,24 +67,47 @@ class MegatriviaController extends Controller
     public function store(Request $request)
     {
         $user = MsGraph::get('me');
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            
+            // Create directory if it doesn't exist
+            $directory = public_path('images/megatriviaAnswers');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+            
+            // Generate unique filename to avoid conflicts
+            $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $image->getClientOriginalExtension();
+            $fileName = $originalName . '_' . time() . '.' . $extension;
+            
+            // Move the file to the destination
+            $image->move($directory, $fileName);
+            
+            // Store the relative path for database
+            $imagePath = 'images/megatriviaAnswers/' . $fileName;
+        }
 
         $megatriviaAnswer = new MegatriviaAnswer;
 
         $megatriviaAnswer->answer = $request->answer;
         $megatriviaAnswer->megatrivia_id = $request->megatrivia_id;
         $megatriviaAnswer->user = $user['displayName'];
+        $megatriviaAnswer->image = $imagePath; // Store the image path
 
         $megatriviaAnswer->save();
 
         $megatrivia = Megatrivia::find($request->megatrivia_id);
 
-        if(strtolower($megatrivia->answer) == strtolower($request->answer)) {
+        if (strtolower($megatrivia->answer) == strtolower($request->answer)) {
 
-            $getMegatriviaFirstCorrect = MegatriviaAnswer::whereRaw('LOWER(`answer`) LIKE "%'.strtolower($megatrivia->answer).'%"')
+            $getMegatriviaFirstCorrect = MegatriviaAnswer::whereRaw('LOWER(`answer`) LIKE "%' . strtolower($megatrivia->answer) . '%"')
                 ->orderBy('created_at', 'ASC')
                 ->get();
 
-            if($getMegatriviaFirstCorrect->isEmpty()) {
+            if ($getMegatriviaFirstCorrect->isEmpty()) {
                 $responseAnswer = 1;
             } else {
                 $responseAnswer = 2;

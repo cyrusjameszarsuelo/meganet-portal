@@ -42,6 +42,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="file" name="image" id="image" class="form-control mb-3"
+                                    style="border: 1px black solid; background-color: #ffffff00 !important; border-radius: 10px; height: auto;">
                                 <input type="hidden" name="megatrivia_id" value="{{ $megatrivia->id }}" id="megatrivia_id">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
@@ -53,12 +55,8 @@
                             </form>
                             <div class="row mt-3">
                                 <div class="col-md-12 text-center">
-                                    <a href="#"
-                                    class="metricStore"
-                                    data-action="All Megatrivia"
-                                    data-url="/megatrivia/all-megatrivia"
-                                    data-value=""
-                                    >See other MegaTrivia</a>
+                                    <a href="#" class="metricStore" data-action="All Megatrivia"
+                                        data-url="/megatrivia/all-megatrivia" data-value="">See other MegaTrivia</a>
                                 </div>
                             </div>
                         </div>

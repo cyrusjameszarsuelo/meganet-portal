@@ -9,21 +9,27 @@ $(document).ready(function () {
     $(form).on('submit', function (event) {
         event.preventDefault();
         var url = $(this).attr('data-action');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        
+        // Create FormData object to handle file uploads
+        var formData = new FormData();
+        formData.append('answer', $('#answer').val());
+        formData.append('megatrivia_id', $('#megatrivia_id').val());
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+        
+        // Add image file if selected
+        if ($('#image').prop('files')[0]) {
+            formData.append('image', $('#image').prop('files')[0]);
+        }
+        
         $.ajax({
             url: url,
-            data: {
-                answer: $('#answer').val(),
-                megatrivia_id: $('#megatrivia_id').val(),
-            },
+            data: formData,
             method: 'POST',
             dataType: 'JSON',
+            processData: false,
+            contentType: false,
             success: function (data) {
-                
+
                 if (data == 1) {
                     Swal.fire({
                         position: 'top-end',
@@ -45,7 +51,7 @@ $(document).ready(function () {
                         title: 'Incorrect! Try again next time!',
                         showConfirmButton: true,
                     });
-                } 
+                }
 
                 $('#answer').val('');
                 $('#answer').attr('disabled', 'disabled');
@@ -57,10 +63,10 @@ $(document).ready(function () {
         });
     });
 
-    
+
 });
 
-$('.disableField').click(function() {
+$('.disableField').click(function () {
     disableField();
 })
 

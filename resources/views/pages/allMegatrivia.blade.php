@@ -40,10 +40,10 @@
                                     </span>
                                     <br>
                                     <span>By:
-                                        @forelse ( $megatriviaData->megatriviaAnswers as $item)
+                                        @forelse ($megatriviaData->megatriviaAnswers as $item)
                                             @if (trim(strtolower($item->answer)) == trim(strtolower($megatriviaData->answer)))
-                                                {{$item->user}}
-                                            @break
+                                                {{ $item->user }}
+                                                @break
                                             @endif
                                         @empty
                                         @endforelse
@@ -96,6 +96,7 @@
                                     <th>ID</th>
                                     <th>Names</th>
                                     <th>Answer</th>
+                                    <th>Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,6 +106,7 @@
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>
                                             <td>{{ $item->answer }}</td>
+                                            <td><img src="{{ asset($item->image) }}" alt=""></td>
                                         </tr>
                                     @endif
                                 @empty
@@ -139,6 +141,7 @@
                                     <th>ID</th>
                                     <th>Names</th>
                                     <th>Answer</th>
+                                    <th>Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,6 +151,7 @@
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>
                                             <td>{{ $item->answer }}</td>
+                                            <td><img src="{{ asset($item->image) }}" alt="" width="80"></td>
                                         </tr>
                                     @endif
                                 @empty
