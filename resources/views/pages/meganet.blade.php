@@ -189,7 +189,7 @@
                         <source src="{{ asset('uploads/Banner/' . $bannerQuestion->image) }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="row" style="position: relative; z-index: 2; height: 500px; background: linear-gradient(0deg, rgb(18 18 18) 0%, rgba(255,255,255,0) 71%);">
+                    <div class="row" style="position: relative; z-index: 2; height: 500px; background: linear-gradient(0deg, rgb(18 18 18) 0%, rgba(255,255,255,0) 30%);">
                         <div class="col-md-6 col-6">
                             <div class="row">
                                 <div class="col-md-5 col-1"></div>
