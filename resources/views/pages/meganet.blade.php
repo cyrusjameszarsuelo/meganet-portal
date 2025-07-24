@@ -59,36 +59,36 @@
         }
 
         /* .modal .sigla .modal-body h2 {
-            font-size: 18px;
-        }
+                font-size: 18px;
+            }
 
-        .modal .sigla .modal-body p {
-            color: #777;
-            font-size: 16px;
-        }
+            .modal .sigla .modal-body p {
+                color: #777;
+                font-size: 16px;
+            }
 
-        .modal .sigla .modal-body h3 {
-            color: #000;
-            font-size: 33px;
-            font-family: Magistral-Bold;
-        }
+            .modal .sigla .modal-body h3 {
+                color: #000;
+                font-size: 33px;
+                font-family: Magistral-Bold;
+            }
 
-        .modal .sigla .modal-body .close-btn {
-            color: #000;
-        }
+            .modal .sigla .modal-body .close-btn {
+                color: #000;
+            }
 
-        .modal .sigla .modal-body .promo-img {
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 50%;
-            flex: 0 0 50%;
-        }
+            .modal .sigla .modal-body .promo-img {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50%;
+                flex: 0 0 50%;
+            }
 
-        .modal .sigla .modal-body .promo-img .price {
-            top: 20px;
-            left: 20px;
-            position: absolute;
-            color: #fff;
-        } */
+            .modal .sigla .modal-body .promo-img .price {
+                top: 20px;
+                left: 20px;
+                position: absolute;
+                color: #fff;
+            } */
 
 
         .custom-select {
@@ -148,6 +148,22 @@
             right: 11px;
             background-color: transparent;
         }
+
+        .bannerVideo {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bannerVideo video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+        }
     </style>
 @endsection
 
@@ -168,16 +184,19 @@
     <section class="content mt-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="bannerImage" style="background-image: url('{{ $bannerQuestion->image }}')">
-                    <div class="row"
-                        style="background: linear-gradient(0deg, rgb(18 18 18) 0%, rgba(255,255,255,0) 71%);">
+                <div class="bannerVideo" style="position: relative; height: 500px; overflow: hidden;">
+                    <video autoplay muted loop style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                        <source src="{{ asset('uploads/Banner/' . $bannerQuestion->image) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="row" style="position: relative; z-index: 2; height: 500px; background: linear-gradient(0deg, rgb(18 18 18) 0%, rgba(255,255,255,0) 71%);">
                         <div class="col-md-6 col-6">
                             <div class="row">
                                 <div class="col-md-5 col-1"></div>
                                 <div class="col-md-7 col-11 d-flex align-items-start flex-column" style="height: 500px;">
-                                    <span class="mt-auto titleBanner"> <span
+                                    {{-- <span class="mt-auto titleBanner"> <span
                                             class="vl mr-2"></span>{{ $bannerQuestion->title }}</span>
-                                    <span class="pb-4 pl-2 questionBanner">{{ $bannerQuestion->question }}</span>
+                                    <span class="pb-4 pl-2 questionBanner">{{ $bannerQuestion->question }}</span> --}}
                                 </div>
                             </div>
                         </div>
@@ -393,13 +412,13 @@
                             </div>
                         </div>
                     </div> --}}
-                        <a type="button" id="closeModal">
-                            <span aria-hidden="true">&times;</span>
-                        </a>
-                        <a href="{{ url('/nomination-mechanics') }}">
-                            <img src="{{ asset('https://meganet-admin.portalwebsite.net/uploads/sigla-awards-image/' . $award->image) }}" alt="{{$award->title}}"
-                                width="100%" height="100%">
-                        </a>
+                    <a type="button" id="closeModal">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                    <a href="{{ url('/nomination-mechanics') }}">
+                        <img src="{{ asset('https://meganet-admin.portalwebsite.net/uploads/sigla-awards-image/' . $award->image) }}"
+                            alt="{{ $award->title }}" width="100%" height="100%">
+                    </a>
                 </div>
             </div>
         </div>
@@ -501,7 +520,8 @@
                         $('#exampleModalCenter').modal('show')
                     }
                 });
-            }, error: function(e) {
+            },
+            error: function(e) {
                 console.log(e);
             }
         })
