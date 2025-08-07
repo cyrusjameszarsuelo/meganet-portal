@@ -100,5 +100,5 @@
 @endsection
 
 @section('pageScripts')
-    <script src="{{ asset('js/megatrivia.js') }}"></script>
+    <script src="{{ asset('js/megatrivia.js?v=1.0') }}"></script>
 @endsection
