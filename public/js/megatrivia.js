@@ -34,21 +34,21 @@ $(document).ready(function () {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Congratulations! You won a special prize!',
+                        title: 'Correct!',
                         showConfirmButton: true,
                     })
                 } else if (data == 2) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Correct! But somebody got it first!',
+                        title: 'Correct!',
                         showConfirmButton: true,
                     });
                 } else if (data == 0) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Incorrect! Try again next time!',
+                        title: 'Incorrect!',
                         showConfirmButton: true,
                     });
                 }
@@ -74,7 +74,7 @@ function disableField() {
     Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: 'Bawal ka na maganswer beshy hehe',
+        title: 'You can answer only once!',
         showConfirmButton: true,
     });
     $('#answer').attr('disabled', 'disabled');

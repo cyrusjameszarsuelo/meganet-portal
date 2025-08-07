@@ -101,11 +101,45 @@ class MegatriviaController extends Controller
 
         $megatrivia = Megatrivia::find($request->megatrivia_id);
 
-        if (strtolower($megatrivia->answer) == strtolower($request->answer)) {
+        // Check if answer is correct
+        $isCorrectAnswer = false;
+        
+        // Decode JSON if it's an array of possible answers
+        $possibleAnswers = json_decode($megatrivia->answer, true);
 
-            $getMegatriviaFirstCorrect = MegatriviaAnswer::whereRaw('LOWER(`answer`) LIKE "%' . strtolower($megatrivia->answer) . '%"')
-                ->orderBy('created_at', 'ASC')
-                ->get();
+        if (is_array($possibleAnswers)) {
+            // Check if user's answer matches any of the possible answers (case insensitive)
+            $userAnswer = strtolower(trim($request->answer));
+            foreach ($possibleAnswers as $correctAnswer) {
+                if (strtolower(trim($correctAnswer)) === $userAnswer) {
+                    $isCorrectAnswer = true;
+                    break;
+                }
+            }
+        } else {
+            // Single answer comparison (existing logic)
+            $isCorrectAnswer = strtolower($megatrivia->answer) == strtolower($request->answer);
+        }
+
+        if ($isCorrectAnswer) {
+
+            // For checking first correct answer, we need to handle both array and string answers
+            if (is_array($possibleAnswers)) {
+                // For array answers, check if any previous answer matches any of the possible answers
+                $getMegatriviaFirstCorrect = MegatriviaAnswer::where('megatrivia_id', $request->megatrivia_id)
+                    ->where(function($query) use ($possibleAnswers) {
+                        foreach ($possibleAnswers as $correctAnswer) {
+                            $query->orWhereRaw('LOWER(`answer`) = ?', [strtolower(trim($correctAnswer))]);
+                        }
+                    })
+                    ->orderBy('created_at', 'ASC')
+                    ->get();
+            } else {
+                // Original logic for string answers
+                $getMegatriviaFirstCorrect = MegatriviaAnswer::whereRaw('LOWER(`answer`) LIKE "%' . strtolower($megatrivia->answer) . '%"')
+                    ->orderBy('created_at', 'ASC')
+                    ->get();
+            }
 
             if ($getMegatriviaFirstCorrect->isEmpty()) {
                 $responseAnswer = 1;

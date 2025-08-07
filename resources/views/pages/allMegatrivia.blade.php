@@ -36,17 +36,45 @@
                                         {!! $megatriviaData->content !!}
                                     </p>
                                     <span>Answer:
-                                        {{ $megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ? $megatriviaData->answer : '' }}
+                                        @if ($megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1)
+                                            @php
+                                                $possibleAnswers = json_decode($megatriviaData->answer, true);
+                                            @endphp
+                                            @if (is_array($possibleAnswers))
+                                                {{ implode(', ', $possibleAnswers) }}
+                                            @else
+                                                {{ $megatriviaData->answer }}
+                                            @endif
+                                        @endif
                                     </span>
                                     <br>
                                     <span>By:
+                                        @php
+                                            $possibleAnswers = json_decode($megatriviaData->answer, true);
+                                            $isArrayAnswer = is_array($possibleAnswers);
+                                            $firstCorrectUser = null;
+                                        @endphp
                                         @forelse ($megatriviaData->megatriviaAnswers as $item)
-                                            @if (trim(strtolower($item->answer)) == trim(strtolower($megatriviaData->answer)))
-                                                {{ $item->user }}
-                                                @break
-                                            @endif
+                                            @php
+                                                $isCorrectAnswer = false;
+                                                if ($isArrayAnswer) {
+                                                    foreach ($possibleAnswers as $correctAnswer) {
+                                                        if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                            $isCorrectAnswer = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                } else {
+                                                    $isCorrectAnswer = trim(strtolower($item->answer)) == trim(strtolower($megatriviaData->answer));
+                                                }
+                                                
+                                                if ($isCorrectAnswer && !$firstCorrectUser) {
+                                                    $firstCorrectUser = $item->user;
+                                                }
+                                            @endphp
                                         @empty
                                         @endforelse
+                                        {{ $firstCorrectUser }}
                                     </span>
                                     <br>
                                     @if (
@@ -100,13 +128,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $possibleAnswers = json_decode($megatriviaData->answer, true);
+                                    $isArrayAnswer = is_array($possibleAnswers);
+                                @endphp
                                 @forelse ($megatriviaData->megatriviaAnswers as $item)
-                                    @if (trim(strtolower($megatriviaData->answer)) == trim(strtolower($item->answer)))
+                                    @php
+                                        $isCorrectAnswer = false;
+                                        if ($isArrayAnswer) {
+                                            foreach ($possibleAnswers as $correctAnswer) {
+                                                if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                    $isCorrectAnswer = true;
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            $isCorrectAnswer = trim(strtolower($megatriviaData->answer)) == trim(strtolower($item->answer));
+                                        }
+                                    @endphp
+                                    @if ($isCorrectAnswer)
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>
                                             <td>{{ $item->answer }}</td>
-                                            <td><img src="{{ asset($item->image) }}" alt=""></td>
+                                            <td><img src="{{ asset($item->image) }}" alt="" width="80"></td>
                                         </tr>
                                     @endif
                                 @empty
@@ -145,8 +190,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $possibleAnswers = json_decode($megatriviaData->answer, true);
+                                    $isArrayAnswer = is_array($possibleAnswers);
+                                @endphp
                                 @forelse ($megatriviaData->megatriviaAnswers as $item)
-                                    @if (trim(strtolower($megatriviaData->answer)) != trim(strtolower($item->answer)))
+                                    @php
+                                        $isCorrectAnswer = false;
+                                        if ($isArrayAnswer) {
+                                            foreach ($possibleAnswers as $correctAnswer) {
+                                                if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                    $isCorrectAnswer = true;
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            $isCorrectAnswer = trim(strtolower($megatriviaData->answer)) == trim(strtolower($item->answer));
+                                        }
+                                    @endphp
+                                    @if (!$isCorrectAnswer)
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>

@@ -11658,7 +11658,7 @@ a.text-dark:focus {
     }
 
     abbr[title]::after {
-        content: " ("attr(title) ")";
+        content: " (" attr(title) ")";
     }
 
     pre {
@@ -12352,7 +12352,7 @@ h5,
     background-position: center;
 }
 
-.megatriviaBox {
+/* .megatriviaBox {
     background-color: #ffffffcc;
     position: relative;
     top: 75px;
@@ -12360,6 +12360,12 @@ h5,
     width: 40%;
     border-radius: 5px;
     padding: 0px 35px;
+} */
+
+.megatriviaBox {
+    background-image: url('../images/question_bg.png');
+    height: 400px;
+    width: 100%;
 }
 
 .megagoodvibesFirst {
