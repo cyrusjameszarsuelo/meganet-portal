@@ -16,10 +16,10 @@ $(document).ready(function () {
         formData.append('megatrivia_id', $('#megatrivia_id').val());
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
         
-        // Add image file if selected
-        if ($('#image').prop('files')[0]) {
-            formData.append('image', $('#image').prop('files')[0]);
-        }
+        // // Add image file if selected
+        // if ($('#image').prop('files')[0]) {
+        //     formData.append('image', $('#image').prop('files')[0]);
+        // }
         
         $.ajax({
             url: url,
