@@ -55,7 +55,7 @@
                                 </div>
 
                                 <form data-action="{{ route('submitAnswerMegatrivia') }}" id="submitAnswerMegatrivia">
-                                    <div class="row mt-2">
+                                    <div class="row mt-5">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <input type="text"
@@ -65,8 +65,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="file" name="image" id="image"
-                                        class="form-control megatrivia-form-control mb-3">
+                                    {{-- <input type="file" name="image" id="image"
+                                        class="form-control megatrivia-form-control mb-3"> --}}
                                     <input type="hidden" name="megatrivia_id" value="{{ $megatrivia->id }}"
                                         id="megatrivia_id">
                                     <div class="row mt-5">
