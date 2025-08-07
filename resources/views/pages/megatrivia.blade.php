@@ -1,22 +1,8 @@
 @extends('main')
 
 @section('pageLinks')
-    <link href="{{ asset('assets/custom/css/megatrivia.css') }}" rel="stylesheet">
-    {{-- <style>
-        .megatriviaBox {
-            background-image: url('/public/images/question_bg.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            padding: 60px 40px;
-            position: relative;
-            margin: 20px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    </style> --}}
+    <link href="{{ asset('assets/custom/css/megatrivia.css?v=1.0.0') }}" rel="stylesheet">
+
 @endsection
 
 @section('content')
