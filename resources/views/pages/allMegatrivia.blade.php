@@ -82,11 +82,10 @@
                                         {{ $firstCorrectUser }}
                                     </span>
                                     <br>
-                                    {{-- @if (
-                                        $megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ||
-                                            ($user['mail'] == 'cjzarsuelo@megawide.com.ph' ||
-                                                $user['mail'] == 'jjpascua@megawide.com.ph' ||
-                                                $user['mail'] == 'jnmaramba@megawide.com.ph'))
+                                    @if (
+                                        $user['mail'] == 'cjzarsuelo@megawide.com.ph' ||
+                                            $user['mail'] == 'jjpascua@megawide.com.ph' ||
+                                            $user['mail'] == 'jnmaramba@megawide.com.ph')
                                         <div class="row">
                                             <div class="col-6 text-center">
                                                 <a type="button" data-toggle="modal"
@@ -101,7 +100,7 @@
                                                         Answers</span></a>
                                             </div>
                                         </div>
-                                    @endif --}}
+                                    @endif
                                 </div>
                             </div>
                         </article>
