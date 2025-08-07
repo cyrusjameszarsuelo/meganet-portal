@@ -59,15 +59,20 @@
                                                 $isCorrectAnswer = false;
                                                 if ($isArrayAnswer) {
                                                     foreach ($possibleAnswers as $correctAnswer) {
-                                                        if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                        if (
+                                                            strtolower(trim($correctAnswer)) ===
+                                                            strtolower(trim($item->answer))
+                                                        ) {
                                                             $isCorrectAnswer = true;
                                                             break;
                                                         }
                                                     }
                                                 } else {
-                                                    $isCorrectAnswer = trim(strtolower($item->answer)) == trim(strtolower($megatriviaData->answer));
+                                                    $isCorrectAnswer =
+                                                        trim(strtolower($item->answer)) ==
+                                                        trim(strtolower($megatriviaData->answer));
                                                 }
-                                                
+
                                                 if ($isCorrectAnswer && !$firstCorrectUser) {
                                                     $firstCorrectUser = $item->user;
                                                 }
@@ -77,11 +82,11 @@
                                         {{ $firstCorrectUser }}
                                     </span>
                                     <br>
-                                    @if (
+                                    {{-- @if (
                                         $megatriviaData->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ||
-                                            $user['mail'] == 'cjzarsuelo@megawide.com.ph' ||
-                                            $user['mail'] == 'jjpascua@megawide.com.ph' ||
-                                            $user['mail'] == 'jnmaramba@megawide.com.ph')
+                                            ($user['mail'] == 'cjzarsuelo@megawide.com.ph' ||
+                                                $user['mail'] == 'jjpascua@megawide.com.ph' ||
+                                                $user['mail'] == 'jnmaramba@megawide.com.ph'))
                                         <div class="row">
                                             <div class="col-6 text-center">
                                                 <a type="button" data-toggle="modal"
@@ -96,7 +101,7 @@
                                                         Answers</span></a>
                                             </div>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </article>
@@ -137,13 +142,17 @@
                                         $isCorrectAnswer = false;
                                         if ($isArrayAnswer) {
                                             foreach ($possibleAnswers as $correctAnswer) {
-                                                if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                if (
+                                                    strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))
+                                                ) {
                                                     $isCorrectAnswer = true;
                                                     break;
                                                 }
                                             }
                                         } else {
-                                            $isCorrectAnswer = trim(strtolower($megatriviaData->answer)) == trim(strtolower($item->answer));
+                                            $isCorrectAnswer =
+                                                trim(strtolower($megatriviaData->answer)) ==
+                                                trim(strtolower($item->answer));
                                         }
                                     @endphp
                                     @if ($isCorrectAnswer)
@@ -199,13 +208,17 @@
                                         $isCorrectAnswer = false;
                                         if ($isArrayAnswer) {
                                             foreach ($possibleAnswers as $correctAnswer) {
-                                                if (strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))) {
+                                                if (
+                                                    strtolower(trim($correctAnswer)) === strtolower(trim($item->answer))
+                                                ) {
                                                     $isCorrectAnswer = true;
                                                     break;
                                                 }
                                             }
                                         } else {
-                                            $isCorrectAnswer = trim(strtolower($megatriviaData->answer)) == trim(strtolower($item->answer));
+                                            $isCorrectAnswer =
+                                                trim(strtolower($megatriviaData->answer)) ==
+                                                trim(strtolower($item->answer));
                                         }
                                     @endphp
                                     @if (!$isCorrectAnswer)
