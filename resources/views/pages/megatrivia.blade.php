@@ -2,7 +2,6 @@
 
 @section('pageLinks')
     <link href="{{ asset('assets/custom/css/megatrivia.css?v=1.0.0') }}" rel="stylesheet">
-
 @endsection
 
 @section('content')
@@ -29,16 +28,22 @@
                                     Your weekly dose of MegaNews - and a chance to win!
                                 </span>
                             </div>
-                            <div class="row mt-5">
+                            <div class="row">
                                 <span
-                                    style="font-size: 32px; font-weight: 900;">{{ strip_tags($megatrivia->content) }}</span>
+                                    style="font-size: 25px; margin-top: 20px; font-weight: 900; color: #ee2f21; font-family: 'Magistral-Bold'; font-weight: bolder;">
+                                    SNAP THE STORY!
+                                </span>
+                            </div>
+                            <div class="row mt-2">
+                                <span
+                                    style="font-size: 25px; font-weight: 900;">{{ strip_tags($megatrivia->content) }}</span>
                             </div>
                             <div class="row">
                                 <div class="mt-3 ">
                                     <span style="font-size: 19px">Get it right and win a </span><span
-                                        style="font-size: 24px; font-weight: 900">Megawide Wallet
-                                        Finder!</span> <img src="{{ asset('images/megawide-wallet.png') }}"
-                                        alt="Megawide Wallet Finder" width="100px" height="100px">
+                                        style="font-size: 24px; font-weight: 900">Smart Weighing Scale!</span> <img
+                                        src="{{ asset('images/megawide-weighing-scale.png') }}" alt="Megawide Wallet Finder"
+                                        width="100px" height="120px">
                                 </div>
                             </div>
                         </div>
@@ -55,18 +60,18 @@
                                 </div>
 
                                 <form data-action="{{ route('submitAnswerMegatrivia') }}" id="submitAnswerMegatrivia">
-                                    <div class="row mt-5">
+                                    <div class="row mt-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="text"
+                                                {{-- <input type="text"
                                                     class="form-control megatrivia-form-control {{ $megatrivia->megatriviaAnswers->where('user', $user['displayName'])->count() == 1 ? 'disableField' : '' }}"
                                                     name="answer" id="answer" autocomplete="off"
-                                                    placeholder="Type your answer">
+                                                    placeholder="Type your answer"> --}}
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <input type="file" name="image" id="image"
-                                        class="form-control megatrivia-form-control mb-3"> --}}
+                                    <input type="file" name="image" id="image"
+                                        class="form-control megatrivia-form-control mb-3" accept="image/*">
                                     <input type="hidden" name="megatrivia_id" value="{{ $megatrivia->id }}"
                                         id="megatrivia_id">
                                     <div class="row mt-5">
@@ -79,7 +84,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="row mt-3">
+                                <div class="row mt-5">
                                     <div class="col-md-12 mt-3">
                                         <a href="#" class="metricStore megatrivia-link" data-action="All Megatrivia"
                                             data-url="/megatrivia/all-megatrivia" data-value="">See other MegaTrivia</a>

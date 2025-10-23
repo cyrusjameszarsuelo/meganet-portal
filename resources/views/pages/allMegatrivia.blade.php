@@ -159,7 +159,9 @@
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>
                                             <td>{{ $item->answer }}</td>
-                                            <td><img src="{{ asset($item->image) }}" alt="" width="80"></td>
+                                            <td><a href="{{ asset($item->image) }}" target="__blank"><img
+                                                        src="{{ asset($item->image) }}" alt="" width="80"></a>
+                                            </td>
                                         </tr>
                                     @endif
                                 @empty
@@ -225,7 +227,9 @@
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->user }}</td>
                                             <td>{{ $item->answer }}</td>
-                                            <td><img src="{{ asset($item->image) }}" alt="" width="80"></td>
+                                            <td><a href="{{ asset($item->image) }}" target="__blank"><img
+                                                        src="{{ asset($item->image) }}" alt="" width="80"></a>
+                                            </td>
                                         </tr>
                                     @endif
                                 @empty
