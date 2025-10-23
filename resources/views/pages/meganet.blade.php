@@ -186,7 +186,7 @@
             <div class="col-md-12">
                 <div class="bannerVideo" style="position: relative; height: 500px; overflow: hidden;">
                     <video autoplay muted loop style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-                        <source src="{{ asset('uploads/Banner/20250724150308.mp4') }}" type="video/mp4">
+                        <source src="{{ asset('uploads/Banner/102325072320.mp4') }}" type="video/mp4">
                         {{-- <source src="{{ asset('uploads/Banner/' . $bannerQuestion->image) }}" type="video/mp4"> --}}
                         Your browser does not support the video tag.
                     </video>
