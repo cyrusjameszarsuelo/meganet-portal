@@ -59,36 +59,36 @@
         }
 
         /* .modal .sigla .modal-body h2 {
-                font-size: 18px;
-            }
+                        font-size: 18px;
+                    }
 
-            .modal .sigla .modal-body p {
-                color: #777;
-                font-size: 16px;
-            }
+                    .modal .sigla .modal-body p {
+                        color: #777;
+                        font-size: 16px;
+                    }
 
-            .modal .sigla .modal-body h3 {
-                color: #000;
-                font-size: 33px;
-                font-family: Magistral-Bold;
-            }
+                    .modal .sigla .modal-body h3 {
+                        color: #000;
+                        font-size: 33px;
+                        font-family: Magistral-Bold;
+                    }
 
-            .modal .sigla .modal-body .close-btn {
-                color: #000;
-            }
+                    .modal .sigla .modal-body .close-btn {
+                        color: #000;
+                    }
 
-            .modal .sigla .modal-body .promo-img {
-                -webkit-box-flex: 0;
-                -ms-flex: 0 0 50%;
-                flex: 0 0 50%;
-            }
+                    .modal .sigla .modal-body .promo-img {
+                        -webkit-box-flex: 0;
+                        -ms-flex: 0 0 50%;
+                        flex: 0 0 50%;
+                    }
 
-            .modal .sigla .modal-body .promo-img .price {
-                top: 20px;
-                left: 20px;
-                position: absolute;
-                color: #fff;
-            } */
+                    .modal .sigla .modal-body .promo-img .price {
+                        top: 20px;
+                        left: 20px;
+                        position: absolute;
+                        color: #fff;
+                    } */
 
 
         .custom-select {
@@ -185,9 +185,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="bannerVideo" style="position: relative; height: 500px; overflow: hidden;">
-                    <video autoplay muted loop style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    <video id="bannerVideo" autoplay muted
+                        style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                         <source src="{{ asset('uploads/Banner/20251024062225.mp4') }}" type="video/mp4">
-                        {{-- <source src="{{ asset('uploads/Banner/' . $bannerQuestion->image) }}" type="video/mp4"> --}}
                         Your browser does not support the video tag.
                     </video>
                     <div class="row" style="position: relative; z-index: 2; height: 500px; ">
@@ -527,5 +527,18 @@
                 console.log(e);
             }
         })
+
+        const video = document.getElementById('bannerVideo');
+
+        video.addEventListener('ended', () => {
+            // Pause the video at the end
+            video.pause();
+
+            // Wait 3 seconds, then replay from the start
+            setTimeout(() => {
+                video.currentTime = 0;
+                video.play();
+            }, 7000); // 3000 milliseconds = 3 seconds
+        });
     </script>
 @endsection
