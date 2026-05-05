@@ -8,6 +8,7 @@ use App\Http\Controllers\MegaprojectController;
 use App\Http\Controllers\MeganewsController;
 use App\Http\Controllers\MegagoodVibesController;
 use App\Http\Controllers\NominationController;
+use App\Http\Controllers\StarAppreciationController;
 use App\Http\Controllers\MetricController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OurCompanyController;
@@ -36,7 +37,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
-    Route::get('connect', [AuthController::class, 'connect'])->name('connect');
+    Route::get('api/connect', [AuthController::class, 'connect'])->name('connect');
 });
 
 Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function () {
@@ -119,6 +120,10 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function () {
     Route::post('/nominate', [NominationController::class, 'store']);
 
     Route::get('/getValidEmployees', [NominationController::class, 'getValidEmployees']);
+
+    // STAR appreciation entries (admin view)
+    Route::get('/star-appreciations', [StarAppreciationController::class, 'index'])->name('star.entries');
+    Route::post('/star-appreciations', [StarAppreciationController::class, 'store'])->name('star.store');
 
 
 });

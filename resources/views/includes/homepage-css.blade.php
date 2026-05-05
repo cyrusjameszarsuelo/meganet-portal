@@ -83,23 +83,46 @@
         transition: transform calc(var(--d) * 2) var(--e);
     }
 
-    .card:nth-child(1):before {
-        background-image: url({{ $meganews->meganews_images->first()->image[0] == 'h' ? $meganews->meganews_images->first()->image : 'https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/' . $meganews->meganews_images->first()->image }});
-        filter: blur(3px);
-        background-position: center;
-    }
+    @isset($meganews)
+        @php
+            // $meganews can be a single model or a collection; always work with one item
+            $meganewsItem = $meganews instanceof \Illuminate\Support\Collection ? $meganews->first() : $meganews;
+            $meganewsBg = null;
 
-    .card:nth-child(2):before {
-        background-image: url({{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }});
-        filter: blur(3px);
-        background-position: center;
-    }
+            if ($meganewsItem && $meganewsItem->meganews_images && $meganewsItem->meganews_images->first()) {
+                $image = $meganewsItem->meganews_images->first()->image;
+                if (!empty($image)) {
+                    $meganewsBg = $image[0] == 'h'
+                        ? $image
+                        : 'https://meganet-admin.portalwebsite.net/uploads/Meganews-Images/' . $image;
+                }
+            }
+        @endphp
 
-    .card:nth-child(3):before {
-        background-image: url({{ $megatrivia->image }});
-        filter: blur(3px);
-        background-position: center;
-    }
+        @if ($meganewsBg)
+            .card:nth-child(1):before {
+                background-image: url({{ $meganewsBg }});
+                filter: blur(3px);
+                background-position: center;
+            }
+        @endif
+    @endisset
+
+    @isset($megagoodVibes)
+        .card:nth-child(2):before {
+            background-image: url({{ $megagoodVibes->thumbnail[0] == 'h' ? $megagoodVibes->thumbnail : 'https://meganet-admin.portalwebsite.net/uploads/MegaGoodVibes-Thumbnail/' . $megagoodVibes->thumbnail }});
+            filter: blur(3px);
+            background-position: center;
+        }
+    @endisset
+
+    @isset($megatrivia)
+        .card:nth-child(3):before {
+            background-image: url({{ $megatrivia->image }});
+            filter: blur(3px);
+            background-position: center;
+        }
+    @endisset
 
     .card:nth-child(4):before {
         background-image: url({{ asset('images/megaprojects/residential1.png') }});

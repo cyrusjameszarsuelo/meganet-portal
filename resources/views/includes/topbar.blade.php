@@ -6,7 +6,7 @@
                     <div class="col-8">
                         <div class="marquee">
                             <p style="color: white">
-                                {!!$runningCredit?->content!!}
+                                {!! isset($runningCredit) && $runningCredit ? $runningCredit->content : '' !!}
                             </p>
                         </div>
                     </div>
@@ -45,13 +45,15 @@
                                 aria-haspopup="true" aria-expanded="false">Corporate
                                 Office</a>
                             <div class="dropdown-menu " style="margin-top: -32px;">
-                                @foreach ($corporateOffice as $item)
-                                {{-- <a class="dropdown-item metricStore" href="/corporate-office/{{ $item->id }}">{{
-                                    $item->department }}</a> --}}
-                                <a class="dropdown-item metricStore" data-action="Department Site"
-                                    data-url="/corporate-office/{{ $item->id }}" data-value="{{ $item->id }}"
-                                    href="#">{{ $item->department }}</a>
-                                @endforeach
+                                @if (!empty($corporateOffice))
+                                    @foreach ($corporateOffice as $item)
+                                    {{-- <a class="dropdown-item metricStore" href="/corporate-office/{{ $item->id }}">{{
+                                        $item->department }}</a> --}}
+                                    <a class="dropdown-item metricStore" data-action="Department Site"
+                                        data-url="/corporate-office/{{ $item->id }}" data-value="{{ $item->id }}"
+                                        href="#">{{ $item->department }}</a>
+                                    @endforeach
+                                @endif
                             </div>
                         </li>
                         <li class="nav-item"><a href="https://human-resource.portalwebsite.net/"
