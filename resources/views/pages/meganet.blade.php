@@ -899,7 +899,7 @@
                                 </div>
                             </div>
 
-                            <div class="mt-3 star-prizes-block">
+                            {{-- <div class="mt-3 star-prizes-block">
                                 <div class="star-prizes-title">Earn Stars and exchange them for these amazing items by end
                                     of the year:</div>
                                 <div class="star-prizes-rules">5 stars when you receive a commendation &bull; 2 stars when
@@ -931,7 +931,7 @@
                                         <span class="star-prize-label">Starbucks GC &ndash; <strong>100 pts</strong></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="mt-3">
                                 <div class="star-progress">
                                     <div class="star-progress-bar" id="starProgressBar"></div>
