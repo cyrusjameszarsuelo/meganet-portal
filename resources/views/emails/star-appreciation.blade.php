@@ -94,7 +94,7 @@
                     </tr>
 
                     <!-- Prizes / rewards section -->
-                    <tr>
+                    {{-- <tr>
                         <td style="padding: 0 24px 8px 24px; font-size: 13px; color: #333333;">
                             <p style="margin: 0 0 4px 0; font-weight: bold;">Earn Stars and exchange them for these amazing items by end of the year:</p>
                             <p style="margin: 0 0 6px 0; font-size: 12px; color:#666666;">5 stars when you receive a commendation &bull; 2 stars when you send a commendation</p>
@@ -131,7 +131,7 @@
                                 </tr>
                             </table>
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     <tr>
                         <td style="padding: 0 24px 18px 24px; font-size: 11px; color: #999999;">
