@@ -13,6 +13,9 @@ return [
 
     'admins' => [
         'cjzarsuelo@megawide.com.ph',
+        'jmsilvestre@megawide.com.ph',
+        'jpgarcia@megawide.com.ph',
+        'wmatias@megawide.com.ph'
         // Add more admin emails here, e.g.
         // 'another.admin@megawide.com.ph',
     ],

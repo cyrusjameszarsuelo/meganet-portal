@@ -104,7 +104,7 @@ class StarAppreciationController extends Controller
             Mail::to($toEmail)->send(new StarAppreciationNotification($entry));
         }
 
-        // Notify the sender that they earned 2 points for sending a commendation
+        // Notify the sender that their STAR appreciation was submitted
         if (!empty($entry->from_email)) {
             Mail::to($entry->from_email)->send(new StarAppreciationSenderNotification($entry));
         }

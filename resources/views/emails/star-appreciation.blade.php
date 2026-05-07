@@ -29,7 +29,8 @@
                     <tr>
                         <td style="padding: 20px 24px 8px 24px; font-size: 14px; color: #333333;">
                             <p style="margin: 0 0 8px 0;">Dear <strong>{{ $entry->to_name }}</strong>,</p>
-                            <p style="margin: 0 0 12px 0;">{{ $entry->from_name }} just sent you a STAR appreciation.</p>
+                            <p style="margin: 0 0 10px 0;">{{ $entry->from_name }} just sent you a STAR appreciation.</p>
+                            <p style="margin: 0 0 14px 0; font-size: 13px;">You just earned <strong>50 STAR points</strong> for being recognized by a teammate. Keep it up!</p>
                             <p style="margin: 0 0 4px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #999999;">Thank you for</p>
                             <div style="margin: 0 0 8px 0; padding: 10px 12px; border-radius: 8px; background-color: #fff7f6; border: 1px solid #ffd6cf;">
                                 {{ $entry->thanks_for }}

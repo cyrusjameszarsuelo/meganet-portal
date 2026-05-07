@@ -37,7 +37,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('login', [AuthController::class, 'login'])->name('login');
-    Route::get('/connect', [AuthController::class, 'connect'])->name('connect');
+    Route::get('/api/connect', [AuthController::class, 'connect'])->name('connect');
 });
 
 Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function () {

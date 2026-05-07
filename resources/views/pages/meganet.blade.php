@@ -1184,9 +1184,9 @@
                     if (percent >= 25 && percent < 75) {
                         label = 'Nice! You are on your way — a few more lines and your teammate feels the love.';
                     } else if (percent >= 75 && percent < 100) {
-                        label = 'Almost there — pick the value(s) they showed, then save your STAR and earn 2 points.';
+                        label = 'Almost there — pick the value(s) they showed, then save your STAR.';
                     } else if (percent === 100) {
-                        label = 'Beautiful! Hit save to send this STAR, brighten a day, and earn 2 points.';
+                        label = 'Beautiful! Hit save to send this STAR and brighten a day.';
                         // softly highlight the prizes block once when complete
                         var $prizes = $('.star-prizes-block');
                         if ($prizes.length) {
