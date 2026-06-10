@@ -813,6 +813,7 @@
                         <button type="button" id="closeModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        <img src="{{ asset('images/megawide-logo.png') }}" alt="Megawide" class="star-modal-logo">
 
                         <span class="star-doodle star-doodle-1"></span>
                         <span class="star-doodle star-doodle-2"></span>
@@ -837,7 +838,7 @@
                                 <div class="star-title-main mt-1">You're the reason "we" did it.</div>
                                 <div class="star-tagline mt-1 d-flex align-items-center">
                                     <span class="star-pill-icon"><i class="fa fa-star"></i></span>
-                                    <span>Capture a quick STAR story to brighten someone’s day.</span>
+                                    <span>Share this MEGA Thank You card and appreciate your KaMegawide today!</span>
                                 </div>
                             </div>
                             <div class="star-hearts">
@@ -847,13 +848,12 @@
 
                         <div class="star-encourage-banner">
                             <div class="star-encourage-chip"><i class="fa fa-heart mr-1"></i>Quick appreciation</div>
-                            <div class="star-encourage-text">It only takes a minute to send a STAR and make someone’s day
-                                brighter.</div>
+                            <div class="star-encourage-text">It only takes a minute to give this card with your STAR story and make someone's day brighter.</div>
                         </div>
 
                         <div class="star-values-block">
                             <div class="star-values-title">Which Megawide value(s) did this person demonstrate?</div>
-                            <div class="star-values-subtitle">Select one or more values that best describe the behavior you are recognizing.</div>
+                            <div class="star-values-subtitle">Select up to 2 values that best describe the behavior you are recognizing.</div>
                             <div class="star-values-grid" id="starValuesGrid">
                                 <button type="button" class="star-value-option" data-value="Community">Community</button>
                                 <button type="button" class="star-value-option" data-value="Malasakit">Malasakit</button>
@@ -967,7 +967,7 @@
                                     @endif
                                     <button type="button" class="btn btn-sm btn-primary star-primary-btn"
                                         id="starDraftButton">
-                                        Save STAR draft
+                                        Send STAR
                                     </button>
                                 </div>
                             </div>
@@ -1223,7 +1223,20 @@
                     });
 
                 $(document).on('click', '.star-value-option', function() {
-                    $(this).toggleClass('active');
+                    var $this = $(this);
+                    if ($this.hasClass('active')) {
+                        $this.removeClass('active');
+                    } else {
+                        var selectedCount = $('.star-value-option.active').length;
+                        if (selectedCount >= 2) {
+                            // Flash the subtitle to hint at the limit
+                            var $subtitle = $('.star-values-subtitle');
+                            $subtitle.css('color', '#ee2f21');
+                            setTimeout(function() { $subtitle.css('color', ''); }, 1200);
+                            return;
+                        }
+                        $this.addClass('active');
+                    }
                     updateStarProgressBar();
                 });
 
