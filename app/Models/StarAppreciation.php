@@ -24,9 +24,12 @@ class StarAppreciation extends Model
         'hype_note',
         'from_name',
         'from_email',
+        'validation_status',
+        'validated_at',
     ];
 
     protected $casts = [
         'selected_values' => 'array',
+        'validated_at'    => 'datetime',
     ];
 }

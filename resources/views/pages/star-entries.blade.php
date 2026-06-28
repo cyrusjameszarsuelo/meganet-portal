@@ -180,6 +180,7 @@
                                             <th>Thanks for</th>
                                             <th>Values</th>
                                             <th>Created at</th>
+                                            <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -206,9 +207,19 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ optional($entry->created_at)->format('M d, Y H:i') }}</td>
-                                                <td class="text-right">
+                                                <td class="star-status-cell">
+                                                    @if ($entry->validation_status === 'valid')
+                                                        <span class="badge badge-success">Valid</span>
+                                                    @elseif ($entry->validation_status === 'not_valid')
+                                                        <span class="badge" style="background-color:#aaa;color:#fff;">Not Valid</span>
+                                                    @else
+                                                        <span class="badge badge-light border text-muted">Pending</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-right" style="white-space:nowrap;">
                                                     <button type="button"
-                                                        class="btn btn-xs btn-outline-primary star-entry-view"
+                                                        class="btn btn-xs btn-outline-secondary star-entry-view"
+                                                        style="font-size:11px;padding:2px 8px;"
                                                         data-to="{{ $entry->to_name ?? '' }}"
                                                         data-from="{{ $entry->from_name ?? '' }}"
                                                         data-thanks="{{ $entry->thanks_for ?? '' }}"
@@ -216,8 +227,24 @@
                                                         data-ar="{{ $entry->action_results ?? ($entry->action . ' ' . $entry->results) }}"
                                                         data-values='@json($selectedValues)'
                                                         data-created="{{ optional($entry->created_at)->format('M d, Y H:i') }}">
-                                                        View
+                                                        <i class="fa fa-eye"></i> View
                                                     </button>
+                                                    @if ($entry->validation_status === null)
+                                                        <button type="button"
+                                                            class="btn btn-xs btn-success star-validate-btn ml-1"
+                                                            style="font-size:11px;padding:2px 8px;"
+                                                            data-id="{{ $entry->id }}"
+                                                            data-status="valid">
+                                                            <i class="fa fa-check"></i> Valid
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-xs btn-outline-danger star-validate-btn ml-1"
+                                                            style="font-size:11px;padding:2px 8px;"
+                                                            data-id="{{ $entry->id }}"
+                                                            data-status="not_valid">
+                                                            <i class="fa fa-times"></i> Not Valid
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -323,6 +350,53 @@
                 $('#starEntryCreated').text($btn.data('created') || '');
 
                 $('#starEntryModal').modal('show');
+            });
+
+            $(document).on('click', '.star-validate-btn', function () {
+                if ($(this).prop('disabled')) return;
+
+                var $btn = $(this);
+                var entryId = $btn.data('id');
+                var status = $btn.data('status');
+                var label = status === 'valid' ? 'Valid' : 'Not Valid';
+
+                Swal.fire({
+                    title: 'Confirm ' + label,
+                    text: 'Are you sure you want to mark this entry as ' + label + '? This action is irreversible.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ee2f21',
+                    confirmButtonText: 'Yes, mark as ' + label,
+                    cancelButtonText: 'Cancel',
+                }).then(function (result) {
+                    if (!result.isConfirmed) return;
+
+                    $btn.prop('disabled', true);
+
+                    $.ajax({
+                        url: '/star-appreciations/' + entryId + '/validate',
+                        method: 'POST',
+                        dataType: 'JSON',
+                        data: {
+                            status: status,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            var $row = $btn.closest('tr');
+                            // Remove both action buttons — entry is now validated
+                            $row.find('.star-validate-btn').remove();
+                            // Update status badge
+                            var badgeHtml = status === 'valid'
+                                ? '<span class="badge badge-success">Valid</span>'
+                                : '<span class="badge" style="background-color:#aaa;color:#fff;">Not Valid</span>';
+                            $row.find('.star-status-cell').html(badgeHtml);
+                        },
+                        error: function (xhr) {
+                            $btn.prop('disabled', false);
+                            Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+                        }
+                    });
+                });
             });
         });
     </script>

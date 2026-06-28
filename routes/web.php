@@ -124,6 +124,7 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated']], function () {
     // STAR appreciation entries (admin view)
     Route::get('/star-appreciations', [StarAppreciationController::class, 'index'])->name('star.entries');
     Route::post('/star-appreciations', [StarAppreciationController::class, 'store'])->name('star.store');
+    Route::post('/star-appreciations/{id}/validate', [StarAppreciationController::class, 'validateEntry'])->name('star.validate');
 
 
 });

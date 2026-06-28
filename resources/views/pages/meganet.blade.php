@@ -851,7 +851,11 @@
                             <div class="star-encourage-text">It only takes a minute to give this card with your STAR story and make someone's day brighter.</div>
                         </div>
 
-                        <div class="star-values-block">
+                        <div class="star-values-block" style="position:relative;">
+                            <!-- Placeholder: replace src with final SIGLA logo asset path when available -->
+                            <img src="{{ asset('images/ictime.png') }}"
+                                 alt="SIGLA Logo"
+                                 style="position:absolute;top:8px;right:10px;height:70px;width:auto;">
                             <div class="star-values-title">Which Megawide value(s) did this person demonstrate?</div>
                             <div class="star-values-subtitle">Select up to 2 values that best describe the behavior you are recognizing.</div>
                             <div class="star-values-grid" id="starValuesGrid">
@@ -967,7 +971,7 @@
                                     @endif
                                     <button type="button" class="btn btn-sm btn-primary star-primary-btn"
                                         id="starDraftButton">
-                                        Send STAR
+                                        Send Card
                                     </button>
                                 </div>
                             </div>
@@ -1293,35 +1297,34 @@
                         success: function(response) {
                             updateStarProgressBar();
                             $('#starProgressLabel').text(
-                                'Your STAR story has been saved. Thank you for appreciating a teammate!'
+                                'Your Mega Thank You Card has been sent. Thank you for appreciating a teammate!'
                                 );
 
                             if (typeof Swal !== 'undefined') {
                                 Swal.fire({
-                                    title: 'STAR submitted!',
-                                    text: 'Your STAR story has been recorded successfully.',
+                                    title: 'Card Sent!',
+                                    text: 'Your Mega Thank You Card has been sent successfully!',
                                     icon: 'success',
                                     confirmButtonColor: '#ee2f21'
                                 }).then(function() {
                                     $('#exampleModalCenter').modal('hide');
+                                    // Reset the form for a new entry
+                                    $('#starAppreciationForm')[0].reset();
+                                    // Restore the From field value (reset keeps default value attribute)
+                                    $('#starFrom').val($('#starFrom').attr('value'));
+                                    // Reset counters (STAR textareas)
+                                    $('#starAppreciationForm textarea').each(function() {
+                                        if (this.id) {
+                                            updateStarCharCount(this.id);
+                                        }
+                                    });
+                                    $('.star-value-option').removeClass('active');
+                                    window._starConfettiPlayed = false;
+                                    updateStarProgressBar();
+                                    $('.star-card').removeClass('active');
+                                    $('.star-card').first().addClass('active');
                                 });
                             }
-
-                            // Reset the form for a new entry
-                            $('#starAppreciationForm')[0].reset();
-                            // Restore the From field value (reset keeps default value attribute)
-                            $('#starFrom').val($('#starFrom').attr('value'));
-                            // Reset counters (STAR textareas)
-                            $('#starAppreciationForm textarea').each(function() {
-                                if (this.id) {
-                                    updateStarCharCount(this.id);
-                                }
-                            });
-                            $('.star-value-option').removeClass('active');
-                            window._starConfettiPlayed = false;
-                            updateStarProgressBar();
-                            $('.star-card').removeClass('active');
-                            $('.star-card').first().addClass('active');
                         },
                         error: function(xhr) {
                             $('#starProgressLabel').text(

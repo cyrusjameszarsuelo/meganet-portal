@@ -8,6 +8,10 @@ use App\Models\Meganews;
 use App\Models\SiglaNominee;
 use App\Mail\StarAppreciationNotification;
 use App\Mail\StarAppreciationSenderNotification;
+use App\Mail\StarAppreciationGiverValidNotification;
+use App\Mail\StarAppreciationReceiverValidNotification;
+use App\Mail\StarAppreciationGiverNotValidNotification;
+use App\Mail\StarAppreciationReceiverNotValidNotification;
 use DB;
 use Dcblogdev\MsGraph\Facades\MsGraph;
 use Illuminate\Http\Request;
@@ -100,18 +104,79 @@ class StarAppreciationController extends Controller
             'from_email' => $user['mail'] ?? ($user['userPrincipalName'] ?? null),
         ]);
 
-        if ($toEmail) {
-            Mail::to($toEmail)->send(new StarAppreciationNotification($entry));
-        }
-
-        // Notify the sender that their STAR appreciation was submitted
-        if (!empty($entry->from_email)) {
-            Mail::to($entry->from_email)->send(new StarAppreciationSenderNotification($entry));
-        }
-
         return response()->json([
             'success' => true,
             'entry'   => $entry,
+        ]);
+    }
+
+    /**
+     * Validate a STAR appreciation entry (admin only).
+     */
+    public function validateEntry(Request $request, $id)
+    {
+        $user = MsGraph::get('me');
+        $currentEmail = strtolower($user['mail'] ?? ($user['userPrincipalName'] ?? ''));
+        $adminEmails = array_map('strtolower', config('star.admins', []));
+
+        if (!in_array($currentEmail, $adminEmails, true)) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $entry = StarAppreciation::find($id);
+        if (!$entry) {
+            return response()->json(['error' => 'Not found'], 404);
+        }
+
+        $validated = $request->validate([
+            'status' => 'required|in:valid,not_valid',
+        ]);
+
+        if ($entry->validation_status !== null) {
+            return response()->json(['error' => 'Already validated'], 422);
+        }
+
+        $status = $validated['status'];
+        $entry->update([
+            'validation_status' => $status,
+            'validated_at'      => now(),
+        ]);
+
+        if ($status === 'valid') {
+            $validThisMonth = StarAppreciation::where('from_email', $entry->from_email)
+                ->where('validation_status', 'valid')
+                ->whereYear('validated_at', now()->year)
+                ->whereMonth('validated_at', now()->month)
+                ->count();
+            $remainingCommendations = max(0, 3 - $validThisMonth);
+
+            if (!empty($entry->from_email)) {
+                Mail::to($entry->from_email)
+                    ->send(new StarAppreciationGiverValidNotification($entry, $remainingCommendations));
+            }
+            if (!empty($entry->to_email)) {
+                Mail::to($entry->to_email)
+                    ->send(new StarAppreciationReceiverValidNotification($entry));
+            }
+        } else {
+            $monthlyCount = StarAppreciation::where('from_email', $entry->from_email)
+                ->whereYear('created_at', now()->year)
+                ->whereMonth('created_at', now()->month)
+                ->count();
+
+            if (!empty($entry->from_email)) {
+                Mail::to($entry->from_email)
+                    ->send(new StarAppreciationGiverNotValidNotification($entry, $monthlyCount));
+            }
+            if (!empty($entry->to_email)) {
+                Mail::to($entry->to_email)
+                    ->send(new StarAppreciationReceiverNotValidNotification($entry));
+            }
+        }
+
+        return response()->json([
+            'success'           => true,
+            'validation_status' => $status,
         ]);
     }
 }
